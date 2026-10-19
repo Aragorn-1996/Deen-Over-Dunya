@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deen Over Dunya</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&display=swap');
+:root{--accent:#c77bbc;--offwhite:#f4eee9;--card-height:530px;--person-width:700px;--person-height:530px}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif}body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:35px 18px 32px;overflow-x:hidden;color:#fff;background:#211626;position:relative;isolation:isolate}
+.ambient{position:fixed;z-index:-8;inset:-20px;pointer-events:none;overflow:hidden;background:#2a1b30}
+.ambient-half{position:absolute;top:0;bottom:0;width:50%;background-size:cover;background-position:center;filter:blur(7px) saturate(.84);transform:scale(1.035);opacity:.66}
+.ambient-left{left:0;background-image:linear-gradient(90deg,rgba(35,17,42,.28),rgba(35,17,42,.50)),url('https://i.postimg.cc/hjPp55dy/f17ea6912cd8e49658a56558aaaa0935.jpg')}
+.ambient-right{right:0;background-image:linear-gradient(270deg,rgba(13,13,23,.3),rgba(35,17,42,.48)),url('https://i.postimg.cc/hP7M6xXh/b4951f129be3c3b2f896f5349e866901.jpg')}
+.ambient:before{content:"";position:absolute;z-index:2;inset:0;pointer-events:none;opacity:0;background:linear-gradient(115deg,transparent 35%,rgba(220,232,255,.14) 48%,transparent 55%),radial-gradient(ellipse at 72% 28%,rgba(190,210,255,.16),transparent 42%);animation:ambientLightning 11s infinite}
+.ambient:after{content:"";position:absolute;inset:0;opacity:.16;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E")}
+.page-shade{position:fixed;z-index:-7;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(29,15,35,.14),rgba(20,14,28,.10) 50%,rgba(8,12,22,.18))}
+/* The uploaded green-screen rain has been keyed to transparent VP9 WebM. */
+.chroma-rain{position:absolute;z-index:3;top:0;right:0;width:50%;height:100%;object-fit:cover;object-position:center;opacity:.92;pointer-events:none;mix-blend-mode:screen;filter:saturate(.9) brightness(1.48) contrast(1.12)}
+/* Extra rain pass makes the rain clearly visible over the right-side Dunya image only. */
+.chroma-rain.rain-extra{z-index:4;opacity:.62;transform:scale(1.06);transform-origin:center right;filter:saturate(.82) brightness(1.65) contrast(1.18);mix-blend-mode:screen}
+.dunya-side{background-blend-mode:screen,normal}
+.page{width:min(100%,1000px);position:relative;z-index:1}
+.heading{position:relative;isolation:isolate;overflow:visible;min-height:46px;display:flex;align-items:center;justify-content:center;gap:.22em;margin:0 auto 12px;text-align:center;color:var(--offwhite);font:normal clamp(13px,1.8vw,19px)/1.2 'Cinzel',Georgia,'Times New Roman',serif;letter-spacing:.9px;white-space:nowrap;text-shadow:0 0 4px rgba(255,255,255,.18),0 0 10px rgba(255,255,255,.16);animation:titleGlow 4.5s ease-in-out infinite;cursor:default}
+.heading span{position:relative;z-index:1;display:inline-block;opacity:0;transform:translateX(-12px);animation:wordReveal .72s cubic-bezier(.2,.75,.25,1) forwards;transition:color .35s ease,text-shadow .35s ease}
+/* The quotation marks appear with the first and last words, never before the title. */
+.heading span:nth-child(1){animation-delay:.05s}.heading span:nth-child(2){animation-delay:.05s}.heading span:nth-child(3){animation-delay:.42s}.heading span:nth-child(4){animation-delay:.79s}.heading span:nth-child(5){animation-delay:1.16s}
+.heading .quote-mark{font-size:1em;color:var(--offwhite)}
+.heading:after{content:none!important}
+.heading:hover{animation:none;text-shadow:0 0 6px rgba(255,255,255,.65),0 0 15px rgba(255,255,255,.48),0 0 25px rgba(255,255,255,.25)}
+.heading:hover span{color:#fffaf5;text-shadow:0 0 5px rgba(255,255,255,.62),0 0 13px rgba(255,255,255,.42),0 0 22px rgba(255,255,255,.24)}
+@keyframes wordReveal{to{opacity:1;transform:translateX(0)}}
+@keyframes titleGlow{0%,100%{text-shadow:0 0 3px rgba(255,255,255,.16),0 0 8px rgba(255,255,255,.12)}50%{text-shadow:0 0 5px rgba(255,255,255,.34),0 0 13px rgba(255,255,255,.23),0 0 19px rgba(255,255,255,.1)}}
+.card{height:var(--card-height);width:100%;position:relative;isolation:isolate;overflow:hidden;border:1px solid rgba(255,255,255,.22);background:rgba(36,20,43,.3);box-shadow:0 28px 90px rgba(9,4,14,.48),inset 0 0 60px rgba(255,255,255,.06)}
+.scene{position:absolute;inset:0;overflow:hidden;z-index:0;background:linear-gradient(90deg,rgba(199,123,188,.12),rgba(26,17,32,.08) 50%,rgba(9,13,24,.22))}
+.side{position:absolute;top:0;bottom:0;width:58%;z-index:0;background-size:cover;background-position:center;filter:saturate(.86) contrast(.97);transition:filter .55s ease,transform .8s ease}
+.deen-side{left:0;background-image:linear-gradient(90deg,rgba(34,17,41,.05),rgba(35,16,41,.16)),url('https://i.postimg.cc/hjPp55dy/f17ea6912cd8e49658a56558aaaa0935.jpg');mask-image:linear-gradient(90deg,black 0%,black 55%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,black 0%,black 55%,transparent 100%)}
+.dunya-side{right:0;background-image:linear-gradient(270deg,rgba(8,13,23,.13),rgba(25,17,31,.17)),url('https://i.postimg.cc/hP7M6xXh/b4951f129be3c3b2f896f5349e866901.jpg');mask-image:linear-gradient(270deg,black 0%,black 55%,transparent 100%);-webkit-mask-image:linear-gradient(270deg,black 0%,black 55%,transparent 100%)}
+.blend-seam{position:absolute;z-index:1;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 24%,rgba(199,123,188,.1) 43%,rgba(23,16,30,.24) 50%,rgba(12,15,25,.12) 57%,transparent 76%)}
+.card-grain{position:absolute;z-index:8;inset:0;pointer-events:none;opacity:.15;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E")}
+.card:before{content:"";position:absolute;z-index:8;inset:12px;border:1px solid rgba(255,255,255,.12);pointer-events:none}.card:after{content:"";position:absolute;z-index:8;inset:0;box-shadow:inset 0 0 75px rgba(14,7,20,.26);pointer-events:none}
+.zone{position:absolute;z-index:2;top:0;bottom:0;width:50%;cursor:default;transition:background .5s ease}.deen-zone{left:0}.dunya-zone{right:0}.deen-zone:hover{background:radial-gradient(ellipse at 30% 58%,rgba(255,255,255,.2),transparent 62%)}.dunya-zone:hover{background:rgba(7,10,20,.2)}
+.card:has(.deen-zone:hover) .deen-side{filter:brightness(1.25) saturate(1.08);transform:scale(1.025)}.card:has(.deen-zone:hover) .deen-label{color:rgba(255,255,255,.95);text-shadow:0 0 10px #fff,0 0 28px #fff,0 0 45px var(--accent)}.card:has(.dunya-zone:hover) .dunya-side{filter:brightness(.62) saturate(.76) contrast(1.04);transform:scale(1.025)}.card:has(.dunya-zone:hover) .dunya-label{color:rgba(255,255,255,.42);text-shadow:0 0 8px rgba(255,255,255,.08);transform:translateX(-50%) scale(1.045)}
+.deen-ray{position:absolute;z-index:2;left:9%;top:2%;width:39%;height:82%;opacity:0;pointer-events:none;transform:translateX(-20px) rotate(-9deg);background:linear-gradient(105deg,transparent 28%,rgba(255,255,255,.03) 38%,rgba(255,255,255,.34) 49%,rgba(255,255,255,.07) 57%,transparent 70%);filter:blur(7px);mix-blend-mode:screen;transition:opacity .7s ease,transform 1s ease}.deen-ray:after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 43%,rgba(255,255,255,.35) 49%,transparent 55%);filter:blur(3px)}.card:has(.deen-zone:hover) .deen-ray{opacity:1;transform:translateX(0) rotate(-9deg)}
+.label{position:absolute;z-index:6;bottom:20px;transform:translateX(-50%);color:rgba(255,255,255,.62);font:normal clamp(22px,3.2vw,38px)/1 Georgia,'Times New Roman',serif;letter-spacing:3px;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.32);transition:color .5s ease,text-shadow .5s ease,transform .5s ease;pointer-events:none}.deen-label{left:25%}.dunya-label{left:75%}
+/* Gentle weather and decorative overlays */
+.left-butterflies,.gold-glitter{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.left-butterflies{z-index:2;width:50%;right:auto;}
+.butterfly{position:absolute;color:#e6b84f;font-size:23px;opacity:0;filter:sepia(1) saturate(1.8) hue-rotate(350deg);text-shadow:0 0 7px rgba(255,207,91,.95),0 0 15px rgba(255,190,55,.65);animation:butterflyDrift 12s ease-in-out infinite}
+.butterfly.b1{left:16%;top:25%;animation-delay:-2s}.butterfly.b2{left:36%;top:52%;font-size:20px;animation-delay:-7s}.butterfly.b3{left:9%;top:70%;font-size:21px;animation-delay:-4.5s}.butterfly.b4{left:43%;top:22%;font-size:17px;animation-delay:-9s}.butterfly.b5{left:24%;top:42%;font-size:25px;animation-delay:-5s}.butterfly.b6{left:6%;top:47%;font-size:16px;animation-delay:-1s}.butterfly.b7{left:40%;top:75%;font-size:19px;animation-delay:-6s}.butterfly.b8{left:28%;top:84%;font-size:15px;animation-delay:-10s}.butterfly.b9{left:48%;top:61%;font-size:18px;animation-delay:-3.5s}
+.gold-glitter{z-index:2;width:50%;left:0;right:auto;background-image:radial-gradient(circle,rgba(255,220,125,.95) 0 1px,transparent 2px),radial-gradient(circle,rgba(255,236,170,.7) 0 1px,transparent 2px),radial-gradient(circle,rgba(255,205,92,.8) 0 1.2px,transparent 2px);background-size:83px 97px,119px 131px,157px 113px;background-position:8px 17px,35px 53px,72px 5px;opacity:.45;animation:goldSparkle 5s ease-in-out infinite}
+@keyframes butterflyDrift{0%,12%,100%{opacity:0;transform:translate(0,12px) rotate(-10deg)}22%,65%{opacity:.82}48%{transform:translate(24px,-25px) rotate(12deg)}80%{opacity:.35;transform:translate(42px,-6px) rotate(-4deg)}}
+@keyframes goldSparkle{0%,100%{opacity:.25;filter:brightness(.85)}50%{opacity:.65;filter:brightness(1.25)}}
+@keyframes ambientLightning{0%,61%,63%,66%,100%{opacity:0}62%{opacity:.45}64%{opacity:.08}65%{opacity:.25}}
+.person-wrap{position:absolute;z-index:5;left:50%;top:0;bottom:0;width:min(var(--person-width),100%);height:100%;transform:translateX(-50%);pointer-events:none;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.person{display:block;width:100%;height:100%;object-fit:contain;object-position:center center;transform:translateY(-10%) scale(1.22);transform-origin:center center;opacity:.78;pointer-events:none;filter:drop-shadow(0 0 18px rgba(199,123,188,.18));transition:none}
+.person-wrap:before{content:"";position:absolute;z-index:2;left:50%;top:7%;width:48%;height:35%;transform:translateX(-50%);pointer-events:none;background:radial-gradient(ellipse at center,rgba(255,250,235,.72) 0%,rgba(255,244,221,.38) 23%,rgba(255,255,255,.14) 48%,transparent 73%);filter:blur(16px);mix-blend-mode:screen;opacity:.9;animation:faceGlow 3.8s ease-in-out infinite}
+.person-wrap:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:soft-light;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+@keyframes faceGlow{0%,100%{opacity:.62;filter:blur(18px)}50%{opacity:1;filter:blur(12px)}}
+.socials{position:relative;z-index:10;width:340px;max-width:100%;height:58px;margin:22px auto 0;display:flex;align-items:center;justify-content:space-around;padding:0 16px;background:rgba(22,9,29,.24);border:1px solid rgba(255,255,255,.15);border-radius:40px;backdrop-filter:blur(12px)}.socials a{width:42px;height:42px;display:grid;place-items:center;color:#fff;text-decoration:none;opacity:.88;border-radius:50%;transition:transform .25s,opacity .25s,filter .25s;background:transparent}.socials a:hover{opacity:1;transform:translateY(-3px);filter:drop-shadow(0 0 8px #fff)}.socials svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.music-frame{position:fixed;width:1px;height:1px;left:-10px;bottom:-10px;opacity:0;pointer-events:none;border:0}
+@media(max-width:650px){:root{--card-height:480px;--person-width:100%;--person-height:480px}body{padding:30px 12px}.heading{min-height:40px;margin-bottom:10px;font-size:clamp(12px,2.5vw,16px);letter-spacing:.6px}.label{bottom:20px;font-size:clamp(18px,5.5vw,29px);letter-spacing:2px}.ambient-half{filter:blur(6px) saturate(.82);transform:scale(1.025)}.chroma-rain{width:50%;height:100%}.socials{margin-top:20px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="ambient" aria-hidden="true"><div class="ambient-half ambient-left"></div><div class="ambient-half ambient-right"></div></div>
+<div class="page-shade" aria-hidden="true"></div>
+<main class="page">
+  <h1 class="heading" aria-label="Deen Over Dunya"><span class="quote-mark">“</span><span>Deen</span><span>Over</span><span>Dunya</span><span class="quote-mark">”</span></h1>
+  <section class="card" id="profileCard" aria-label="Deen Over Dunya profile card">
+    <div class="scene"><div class="side deen-side"></div><div class="side dunya-side"></div><div class="blend-seam"></div><div class="deen-ray"></div></div>
+    <div class="left-butterflies" aria-hidden="true"><span class="butterfly b1">🦋</span><span class="butterfly b2">🦋</span><span class="butterfly b3">🦋</span><span class="butterfly b4">🦋</span><span class="butterfly b5">🦋</span><span class="butterfly b6">🦋</span><span class="butterfly b7">🦋</span><span class="butterfly b8">🦋</span><span class="butterfly b9">🦋</span></div><div class="gold-glitter" aria-hidden="true"></div>
+    <video class="chroma-rain" autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="rain-chromakey-transparent.webm" type="video/webm"></video>
+    <video class="chroma-rain rain-extra" autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="rain-chromakey-transparent.webm" type="video/webm"></video>
+    <div class="zone deen-zone" aria-label="Deen section"></div><div class="zone dunya-zone" aria-label="Dunya section"></div>
+    <div class="person-wrap"><img class="person" id="personImage" src="https://i.postimg.cc/PJJGgkJp/arm-motion-transparent-2x.gif" alt="Animated central figure"></div>
+    <div class="label deen-label">Deen</div><div class="label dunya-label">Dunya</div><div class="card-grain"></div>
+  </section>
+  <nav class="socials" aria-label="Social media links">
+    <a href="https://forum.xat.com/profile/55475/" target="_blank" rel="noopener noreferrer" title="Forum profile" aria-label="Forum profile"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="m5 7 7 6 7-6"/></svg></a>
+    <a href="https://www.youtube.com/watch?v=25MmCEpftKo" target="_blank" rel="noopener noreferrer" title="Player" aria-label="YouTube player"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4z" fill="currentColor" stroke="none"/></svg></a>
+    <a href="https://www.twitch.tv/nenestita" target="_blank" rel="noopener noreferrer" title="Twitch" aria-label="Twitch"><svg viewBox="0 0 24 24"><path d="M5 3h16v12l-5 5h-4l-3 3v-3H5z"/><path d="M10 7v5M15 7v5"/></svg></a>
+    <a href="https://xat.com/blog" target="_blank" rel="noopener noreferrer" title="xat Blog" aria-label="xat blog"><svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H8l-4 2v-5.5A7.5 7.5 0 1 1 20 11.5Z"/></svg></a>
+  </nav>
+</main>
+<iframe class="music-frame" src="https://www.youtube-nocookie.com/embed/QJrjKimYzL4?autoplay=1&loop=1&playlist=QJrjKimYzL4&controls=0&playsinline=1&enablejsapi=1" title="Background music" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+<script>
+const card=document.getElementById('profileCard');
+const deenZone=document.querySelector('.deen-zone');
+const dunyaZone=document.querySelector('.dunya-zone');
+deenZone.addEventListener('pointerenter',()=>card.classList.add('deen-active'));
+deenZone.addEventListener('pointerleave',()=>card.classList.remove('deen-active'));
+dunyaZone.addEventListener('pointerenter',()=>card.classList.add('dunya-active'));
+dunyaZone.addEventListener('pointerleave',()=>card.classList.remove('dunya-active'));
+function setDeenImage(url){document.querySelector('.deen-side').style.backgroundImage=`linear-gradient(90deg,rgba(34,17,41,.05),rgba(35,16,41,.16)),url("${url}")`;document.querySelector('.ambient-left').style.backgroundImage=`linear-gradient(90deg,rgba(35,17,42,.28),rgba(35,17,42,.50)),url("${url}")`}
+function setDunyaImage(url){document.querySelector('.dunya-side').style.backgroundImage=`linear-gradient(270deg,rgba(8,13,23,.13),rgba(25,17,31,.17)),url("${url}")`;document.querySelector('.ambient-right').style.backgroundImage=`linear-gradient(270deg,rgba(13,13,23,.3),rgba(35,17,42,.48)),url("${url}")`}
+function setPersonImage(url){document.getElementById('personImage').src=url}
+</script>
+</body>
+</html>
